@@ -1,0 +1,30 @@
+[Unit]
+Description=Astar Snapshot Node
+After=network-online.target
+
+[Service]
+Type=simple
+User=snapshot
+ExecStart=/usr/local/bin/astar-collator \
+  --chain astar \
+  --parachain-id 2006 \
+  --pruning 1000 \
+  --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0' \
+  --name "StakeCraft-Snapshots" \
+  --execution wasm \
+  --prometheus-external \
+  --ws-port 9944 \
+  --port 33333 \
+  --trie-cache-size 1 \
+  --rpc-port 29933 \
+  --prometheus-port 39616 \
+  -- \
+  --pruning 1000 \
+  --prometheus-port 39626
+
+Restart=always
+RestartSec=3
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target
