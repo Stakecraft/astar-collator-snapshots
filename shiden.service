@@ -1,0 +1,32 @@
+[Unit]
+Description=Shiden Snapshot Node
+After=network-online.target
+
+[Service]
+Type=simple
+User=snapshot
+ExecStart=/usr/local/bin/astar-collator \
+	--chain shiden \
+	--pruning 1000 \
+	--name "StakeCraft-Snapshots" \
+	--rpc-cors all \
+	--telemetry-url 'wss://telemetry.polkadot.io/submit/ 0' \
+	--execution wasm \
+	--rpc-port 29833 \
+	--ws-port 29844 \
+	--port 30533 \
+	--state-cache-size 1 \
+  --prometheus-port 38615 \
+	-- \
+	--port 32334 \
+	--pruning 1000 \
+	--rpc-port 33933 \
+	--ws-port 33945 \
+	--prometheus-port 38616
+
+Restart=always
+RestartSec=3
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target

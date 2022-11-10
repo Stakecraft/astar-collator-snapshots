@@ -7,7 +7,6 @@ Type=simple
 User=snapshot
 ExecStart=/usr/local/bin/astar-collator \
   --chain astar \
-  --parachain-id 2006 \
   --pruning 1000 \
   --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0' \
   --name "StakeCraft-Snapshots" \
